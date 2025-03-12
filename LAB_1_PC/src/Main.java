@@ -13,7 +13,5 @@ public class Main {
         HarmonicSummator HS = new HarmonicSummator(n, precision);
         HS.calculateSum();
         HS.calculateSumParallel();
-        //HS.calculateSumParallel1();
-
     }
 }

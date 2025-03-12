@@ -1,13 +1,9 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+
 
 public class HarmonicSummator {
     private final String inputFile = "data//input.txt";
@@ -43,33 +39,6 @@ public class HarmonicSummator {
         writeToFile(content, outputFile, false);
         System.out.println(content);
     }
-
-//    public void calculateSumParallel1() {
-//        System.out.println("Багатопотокове обчислення:");
-//        ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-//
-//        long startTime = System.nanoTime();
-//        final BigDecimal[] totalSum = {BigDecimal.ZERO};
-//        int chunkSize = (n + Runtime.getRuntime().availableProcessors() - 1) / Runtime.getRuntime().availableProcessors();
-//        for (int i = 0; i < n; i += chunkSize) {
-//            final int start = i;
-//            final int end = Math.min(i + chunkSize, n);
-//            executorService.submit(() -> {
-//                BigDecimal partialSum = calculatePartialSum(start, end);
-//                    totalSum[0] = totalSum[0].add(partialSum);
-//            });
-//        }
-//
-//        executorService.shutdown();
-//
-//
-//        long endTime = System.nanoTime();
-//        long duration = endTime - startTime;
-//
-//        String content = "Сума (Parallel): " + totalSum[0] + "\nЧас виконання: " + duration + " нс";
-//        writeToFile(content, outputFile, true);
-//        System.out.println(content);
-//    }
 
     public void calculateSumParallel() {
         System.out.println("Багатопотокове обчислення:");
@@ -120,25 +89,6 @@ public class HarmonicSummator {
         }
         return sum;
     }
-
-//    public void calculateSumParallel_par() {
-//        System.out.println("Багатопотокове обчислення:");
-//
-//        int numThreads = Runtime.getRuntime().availableProcessors(); // Кількість доступних потоків
-//        long startTime = System.nanoTime();
-//
-//        BigDecimal totalSum = IntStream.rangeClosed(1, n)
-//                .parallel()
-//                .mapToObj(i -> arr[i])
-//                .reduce(BigDecimal.ZERO, BigDecimal::add);
-//
-//        long endTime = System.nanoTime();
-//        long duration = (endTime - startTime);
-//
-//        String content = "Кількість потоків " + numThreads + ", Сума (Parallel): " + totalSum + "\nЧас виконання: " + duration + " нс";
-//        writeToFile(content, outputFile, true);
-//        System.out.println(content);
-//    }
 
     public void writeToFile(String content, String fileName, boolean append) {
         File file = new File(fileName);
