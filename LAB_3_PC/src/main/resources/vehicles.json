@@ -1,0 +1,27 @@
+[
+  {
+    "id": "13",
+    "type": "Bus",
+    "routeId": "101"
+  },
+  {
+    "id": "2",
+    "type": "Tram",
+    "routeId": "102"
+  },
+  {
+    "id": "3",
+    "type": "Trolleybus",
+    "routeId": "103"
+  },
+  {
+    "id": "4",
+    "type": "Bus",
+    "routeId": "104"
+  },
+  {
+    "id": "5",
+    "type": "Tram",
+    "routeId": "105"
+  }
+]
