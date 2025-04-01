@@ -25,7 +25,9 @@ public class ScheduleController {
         if (inputStream == null) {
             throw new FileNotFoundException("Файл schedules.json не знайдено");
         }
-        this.storageService = new JsonStorageService<>(inputStream, new TypeReference<>() {});
+        //this.storageService = new JsonStorageService<>(inputStream, new TypeReference<>() {});
+        this.storageService = new JsonStorageService<>("D:\\проекти Java\\parallelCalculation\\LAB_3_PC\\src\\main\\resources\\schedules.json", new TypeReference<>() {});
+
     }
 
     @Async

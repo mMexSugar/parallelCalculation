@@ -24,7 +24,8 @@ public class VehicleController {
         if (inputStream == null) {
             throw new FileNotFoundException("Файл vehicles.json не знайдено");
         }
-        this.storageService = new JsonStorageService<>(inputStream, new TypeReference<>() {});
+        //this.storageService = new JsonStorageService<>(inputStream, new TypeReference<>() {});
+        this.storageService = new JsonStorageService<>("D:\\проекти Java\\parallelCalculation\\LAB_3_PC\\src\\main\\resources\\vehicles.json", new TypeReference<>() {});
     }
 
     @Async
