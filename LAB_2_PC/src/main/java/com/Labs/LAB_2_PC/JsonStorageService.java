@@ -2,6 +2,8 @@ package com.Labs.LAB_2_PC;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -19,6 +21,10 @@ public class JsonStorageService<T extends Identifiable> {
     public JsonStorageService(String filePath, TypeReference<List<T>> typeReference) throws IOException {
         this.filePath = filePath;
         this.typeReference = typeReference;
+
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
         File file = new File(filePath);
         if (file.exists()) {
             try (InputStream inputStream = new FileInputStream(file)) {

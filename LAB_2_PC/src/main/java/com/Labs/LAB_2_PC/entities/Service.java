@@ -1,7 +1,13 @@
 package com.Labs.LAB_2_PC.entities;
 
 import com.Labs.LAB_2_PC.Identifiable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Service extends Identifiable {
     private Long id;
     private String name;

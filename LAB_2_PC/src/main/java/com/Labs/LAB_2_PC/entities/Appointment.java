@@ -1,10 +1,16 @@
 package com.Labs.LAB_2_PC.entities;
 
 import com.Labs.LAB_2_PC.Identifiable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Appointment extends Identifiable {
     private Long id;
     private Long carId;
