@@ -4,9 +4,11 @@ import com.Labs.LAB_2_PC.Identifiable;
 
 public class Car extends Identifiable {
     private Long id;
+    private Long userId;
     private String model;
     private String manufacturer;
     private int year;
+    private String licensePlate;
 
     @Override
     public Long getId() {
