@@ -6,8 +6,9 @@ import lombok.Data;
 @Data
 public class Vehicle implements Identifiable {
     private String id;
-    private String type;     // автобус, трамвай, тролейбус
-    private String routeId;  // до якого маршруту призначено
+    private VehicleType type;
+    private String model;
+    private int capacity;
 
     @Override
     public String getId() {

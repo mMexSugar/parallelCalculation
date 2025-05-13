@@ -36,6 +36,13 @@ public class JsonStorageService<T extends Identifiable> {
         writeList(list);
     }
 
+    public T getById(String id) {
+        return getAll().stream()
+                .filter(item -> item.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+    }
+
     public CompletableFuture<T> update(String id, T updated) {
         return CompletableFuture.supplyAsync(() -> {
             List<T> list = getAll();

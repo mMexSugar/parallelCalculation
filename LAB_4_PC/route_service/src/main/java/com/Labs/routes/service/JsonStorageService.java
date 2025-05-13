@@ -30,6 +30,13 @@ public class JsonStorageService<T extends Identifiable> {
         }
     }
 
+    public T getById(String id) {
+        return getAll().stream()
+                .filter(item -> id.equals(item.getId()))
+                .findFirst()
+                .orElse(null);
+    }
+
     public void save(T obj) {
         List<T> list = getAll();
         list.add(obj);

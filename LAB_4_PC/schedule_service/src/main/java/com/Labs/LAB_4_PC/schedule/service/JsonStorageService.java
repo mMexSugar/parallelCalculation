@@ -3,6 +3,8 @@ package com.Labs.LAB_4_PC.schedule.service;
 import com.Labs.LAB_4_PC.schedule.Identifiable;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,12 +14,14 @@ import java.util.concurrent.CompletableFuture;
 public class JsonStorageService<T extends Identifiable> {
 
     private final File file;
-    private final ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper = new ObjectMapper()
+            .registerModule(new JavaTimeModule())
+            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     private final TypeReference<List<T>> typeReference;
 
     public JsonStorageService(String filePath, TypeReference<List<T>> typeReference) {
         this.file = new File(filePath);
-        this.objectMapper = new ObjectMapper();
+        //this.objectMapper = new ObjectMapper();
         this.typeReference = typeReference;
     }
 
@@ -28,6 +32,12 @@ public class JsonStorageService<T extends Identifiable> {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    public T getById(String id) {
+        return getAll().stream()
+                .filter(item -> id.equals(item.getId()))
+                .findFirst()
+                .orElse(null);
     }
 
     public void save(T obj) {

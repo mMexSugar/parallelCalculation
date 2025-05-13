@@ -2,6 +2,7 @@ package com.Labs.LAB_4_PC.vehicle.controller;
 
 import com.Labs.LAB_4_PC.vehicle.entity.Vehicle;
 import com.Labs.LAB_4_PC.vehicle.service.JsonStorageService;
+import com.Labs.LAB_4_PC.vehicle.service.VehicleValidator;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
@@ -17,10 +19,12 @@ import java.util.concurrent.CompletableFuture;
 public class VehicleController {
 
     private final JsonStorageService<Vehicle> storageService;
+    private final VehicleValidator validator;
 
     @Autowired
-    public VehicleController() throws IOException {
+    public VehicleController(VehicleValidator validator) throws IOException {
         this.storageService = new JsonStorageService<>("src/main/resources/vehicles.json", new TypeReference<List<Vehicle>>() {});
+        this.validator = validator;
     }
 
     @Async
@@ -29,20 +33,38 @@ public class VehicleController {
         return CompletableFuture.supplyAsync(storageService::getAll);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") String id) {
+        Vehicle vehicle = storageService.getById(id);
+        return (vehicle != null) ? ResponseEntity.ok(vehicle) : ResponseEntity.notFound().build();
+    }
+
     @Async
     @PostMapping
-    public CompletableFuture<ResponseEntity<Vehicle>> add(@RequestBody Vehicle vehicle) {
+    public CompletableFuture<ResponseEntity<?>> add(@RequestBody Vehicle vehicle) {
         return CompletableFuture.supplyAsync(() -> {
-            storageService.save(vehicle);
-            return ResponseEntity.ok(vehicle);
+            try {
+                validator.validate(vehicle);
+                storageService.save(vehicle);
+                return ResponseEntity.ok(vehicle);
+            } catch (IllegalArgumentException ex) {
+                return ResponseEntity.badRequest().body(Map.of("error", ex.getMessage()));
+            }
         });
     }
 
     @Async
     @PutMapping("/{id}")
-    public CompletableFuture<ResponseEntity<Vehicle>> update(@PathVariable String id, @RequestBody Vehicle updated) {
-        return storageService.update(id, updated)
-                .thenApply(v -> (v != null) ? ResponseEntity.ok(v) : ResponseEntity.notFound().build());
+    public CompletableFuture<ResponseEntity<?>> update(@PathVariable String id, @RequestBody Vehicle updated) {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                validator.validate(updated);
+                CompletableFuture<Vehicle> v = storageService.update(id, updated);
+                return (v != null) ? ResponseEntity.ok(v) : ResponseEntity.notFound().build();
+            } catch (IllegalArgumentException ex) {
+                return ResponseEntity.badRequest().body(Map.of("error", ex.getMessage()));
+            }
+        });
     }
 
     @Async

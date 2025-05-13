@@ -1,1 +1,16 @@
-[]
+[ {
+  "id" : "v1",
+  "type" : "BUS",
+  "model" : "Bogdan A092",
+  "capacity" : 50
+}, {
+  "id" : "v2",
+  "type" : "TRAM",
+  "model" : "Tatra T3",
+  "capacity" : 120
+}, {
+  "id" : "v3",
+  "type" : "TROLLEYBUS",
+  "model" : "Troll T231",
+  "capacity" : 71
+} ]

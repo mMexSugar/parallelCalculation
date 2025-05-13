@@ -11,9 +11,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Route implements Identifiable {
-    private String id;
-    private String name;
-    private List<String> vehicleIds; // ID призначених транспортних засобів
+        private String id;
+        private String name;
+        private String startPoint;
+        private String endPoint;
+        private List<String> vehicleIds;
     @Override
     public String getId() {
         return id;

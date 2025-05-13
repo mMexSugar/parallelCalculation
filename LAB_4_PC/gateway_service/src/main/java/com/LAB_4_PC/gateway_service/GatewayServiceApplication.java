@@ -1,4 +1,4 @@
-package com.example.gateway_service;
+package com.LAB_4_PC.gateway_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
