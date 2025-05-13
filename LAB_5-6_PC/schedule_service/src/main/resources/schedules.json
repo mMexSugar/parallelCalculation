@@ -1,0 +1,16 @@
+[
+  {
+    "id": "s1",
+    "routeId": "r1",
+    "startTime": "07:00",
+    "endTime": "10:00",
+    "frequencyMinutes": 15
+  },
+  {
+    "id": "s2",
+    "routeId": "r2",
+    "startTime": "08:00",
+    "endTime": "12:00",
+    "frequencyMinutes": 20
+  }
+]
