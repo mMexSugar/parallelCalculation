@@ -1,6 +1,6 @@
-package com.Labs.routes.entity;
+package com.Labs.LAB_5_6_PC.routes.entity;
 
-import com.Labs.routes.Identifiable;
+import com.Labs.LAB_5_6_PC.routes.Identifiable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

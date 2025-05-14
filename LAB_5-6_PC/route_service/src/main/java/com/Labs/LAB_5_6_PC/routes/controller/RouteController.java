@@ -1,8 +1,8 @@
-package com.Labs.routes.controller;
+package com.Labs.LAB_5_6_PC.routes.controller;
 
-import com.Labs.routes.entity.Route;
-import com.Labs.routes.service.JsonStorageService;
-import com.Labs.routes.service.RouteValidator;
+import com.Labs.LAB_5_6_PC.routes.entity.Route;
+import com.Labs.LAB_5_6_PC.routes.service.JsonStorageService;
+import com.Labs.LAB_5_6_PC.routes.service.RouteValidator;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;

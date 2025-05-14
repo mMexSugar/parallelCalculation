@@ -1,6 +1,6 @@
-package com.Labs.routes.service;
+package com.Labs.LAB_5_6_PC.vehicle.service;
 
-import com.Labs.routes.Identifiable;
+import com.Labs.LAB_5_6_PC.vehicle.Identifiable;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -30,17 +30,17 @@ public class JsonStorageService<T extends Identifiable> {
         }
     }
 
-    public T getById(String id) {
-        return getAll().stream()
-                .filter(item -> id.equals(item.getId()))
-                .findFirst()
-                .orElse(null);
-    }
-
     public void save(T obj) {
         List<T> list = getAll();
         list.add(obj);
         writeList(list);
+    }
+
+    public T getById(String id) {
+        return getAll().stream()
+                .filter(item -> item.getId().equals(id))
+                .findFirst()
+                .orElse(null);
     }
 
     public CompletableFuture<T> update(String id, T updated) {

@@ -1,4 +1,4 @@
-package com.Labs.routes;
+package com.Labs.LAB_5_6_PC.routes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

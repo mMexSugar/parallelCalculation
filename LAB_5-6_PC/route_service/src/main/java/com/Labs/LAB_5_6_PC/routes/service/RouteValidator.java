@@ -1,11 +1,9 @@
-package com.Labs.routes.service;
+package com.Labs.LAB_5_6_PC.routes.service;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
-
-import com.Labs.routes.entity.Route;
+import com.Labs.LAB_5_6_PC.routes.entity.Route;
 
 @Component
 public class RouteValidator {
