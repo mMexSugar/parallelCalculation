@@ -30,6 +30,11 @@ public class VehicleController {
         this.validator = validator;
     }
 
+    @GetMapping("/ping")
+    public ResponseEntity<String> ping() {
+        return ResponseEntity.ok("pong");
+    }
+
     @Async
     @GetMapping
     public CompletableFuture<List<Vehicle>> getAll() {

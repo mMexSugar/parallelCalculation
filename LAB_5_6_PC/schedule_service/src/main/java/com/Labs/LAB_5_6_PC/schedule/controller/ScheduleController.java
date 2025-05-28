@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,8 @@ import java.util.concurrent.CompletableFuture;
 public class ScheduleController {
 
     private final JsonStorageService<Schedule> storageService;
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
     private final ScheduleValidator validator;
 
     @Autowired

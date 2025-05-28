@@ -38,11 +38,22 @@
 #      - schedule_service
 
 services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - urban-network
+
   route_service:
     build: ./route_service
     container_name: route_service
     ports:
       - "8081:8081"
+    depends_on:
+      - redis
+      - vehicle_service
     networks:
       - urban-network
 
@@ -51,6 +62,8 @@ services:
     container_name: vehicle_service
     ports:
       - "8082:8082"
+    depends_on:
+      - redis
     networks:
       - urban-network
 
@@ -59,6 +72,9 @@ services:
     container_name: schedule_service
     ports:
       - "8083:8083"
+    depends_on:
+      - redis
+      - route_service
     networks:
       - urban-network
 
@@ -73,12 +89,6 @@ services:
       - schedule_service
     networks:
       - urban-network
-
-  redis:
-    image: redis:latest
-    container_name: redis
-    ports:
-      - "6379:6379"
 
 networks:
   urban-network:

@@ -9,6 +9,7 @@ import com.Labs.LAB_5_6_PC.routes.entity.Route;
 public class RouteValidator {
 
     private final RestTemplate restTemplate;
+    private final String urlVehicles = "http://localhost:8082/vehicles/";
 
     public RouteValidator(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -25,7 +26,7 @@ public class RouteValidator {
 
         for (String vehicleId : route.getVehicleIds()) {
             try {
-                String url = "http://localhost:8080/vehicles/" + vehicleId;
+                String url = urlVehicles + vehicleId;
                 restTemplate.getForObject(url, Object.class);
             } catch (Exception e) {
                 throw new IllegalArgumentException("Транспортний засіб з ID " + vehicleId + " не знайдено");
